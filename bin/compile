@@ -132,6 +132,15 @@ status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 
+if [ -f $build_dir/bower.json ]; then
+  echo "Found bower.json, installing Bower"
+  npm install bower
+  echo "Cleaning Bower cache"
+  $build_dir/node_modules/.bin/bower cache clean
+  echo "Installing Bower dependencies"
+  $build_dir/node_modules/.bin/bower install
+fi
+
 # Check and run gulp
 (
   if [ -f $build_dir/gulpfile.js ]; then
