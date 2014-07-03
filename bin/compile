@@ -84,7 +84,7 @@ fi
 
   status "Installing dependencies"
   # Make npm output to STDOUT instead of its default STDERR
-  npm install --userconfig $build_dir/.npmrc --production 2>&1 | indent
+  npm install --userconfig $build_dir/.npmrc 2>&1 | indent
 )
 
 # Persist goodies like node-version in the slug
@@ -145,6 +145,9 @@ echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\
     npm install gulp
     status "Found gulpfile, running gulp heroku:$NODE_ENV task"
     $build_dir/node_modules/.bin/gulp heroku:$NODE_ENV
+    
+    status "Removing development dependencies"
+    npm prune --production 2&1 | indent
   else
     status "No gulpfile found"
   fi
