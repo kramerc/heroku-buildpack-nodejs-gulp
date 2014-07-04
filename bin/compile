@@ -134,11 +134,11 @@ echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\
 
 if [ -f $build_dir/bower.json ]; then
   echo "Found bower.json, installing Bower"
-  npm install bower
+  npm install bower | indent
   echo "Cleaning Bower cache"
-  $build_dir/node_modules/.bin/bower cache clean
+  $build_dir/node_modules/.bin/bower cache clean | indent
   echo "Installing Bower dependencies"
-  $build_dir/node_modules/.bin/bower install
+  $build_dir/node_modules/.bin/bower install | indent
 fi
 
 # Check and run gulp
@@ -151,10 +151,10 @@ fi
     fi
 
     # Install gulp locally
-    npm install gulp
+    npm install gulp | indent
     status "Found gulpfile, running gulp heroku:$NODE_ENV task"
     $build_dir/node_modules/.bin/gulp heroku:$NODE_ENV
-    
+
     status "Removing development dependencies"
     npm prune --production 2>&1 | indent
   else
