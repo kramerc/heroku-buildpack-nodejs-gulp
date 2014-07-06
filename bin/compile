@@ -133,11 +133,11 @@ mkdir -p $build_dir/.profile.d
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 
 if [ -f $build_dir/bower.json ]; then
-  echo "Found bower.json, installing Bower"
+  status "Found bower.json, installing Bower"
   npm install bower | indent
-  echo "Cleaning Bower cache"
+  status "Cleaning Bower cache"
   $build_dir/node_modules/.bin/bower cache clean | indent
-  echo "Installing Bower dependencies"
+  status "Installing Bower dependencies"
   $build_dir/node_modules/.bin/bower install | indent
 fi
 
