@@ -153,7 +153,7 @@ fi
     # Install gulp locally
     npm install gulp | indent
     status "Found gulpfile, running gulp heroku:$NODE_ENV task"
-    $build_dir/node_modules/.bin/gulp heroku:$NODE_ENV
+    $build_dir/node_modules/.bin/gulp heroku:$NODE_ENV | indent
 
     status "Removing development dependencies"
     npm prune --production 2>&1 | indent
